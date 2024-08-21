@@ -4,15 +4,15 @@ import TimeCircleSelector from "./components/TimeCircleSelector.vue";
 import useCurrentTime from "./composable/useCurrentTime.ts"
 import { ref, watchEffect } from "vue";
 
-const PER_TICK_POSITION = 40;
-const hourFirstPosition = ref(0);
-const hourSecondPosition = ref(0);
+const PER_TICK_POSITION: number = 40;
+const hourFirstPosition = ref<number>(0);
+const hourSecondPosition = ref<number>(0);
 
-const minuteFirstPosition = ref(0);
-const minuteSecondPosition = ref(0);
+const minuteFirstPosition = ref<number>(0);
+const minuteSecondPosition = ref<number>(0);
 
-const secondFirstPosition = ref(0);
-const secondSecondPosition = ref(0);
+const secondFirstPosition = ref<number>(0);
+const secondSecondPosition = ref<number>(0);
 
 /**
  * number of times
@@ -36,22 +36,21 @@ const { currentTime } = useCurrentTime();
  * Setting Hour, Minute and Second Position
  */
 watchEffect(() => {
-  console.log(currentTime.value.getSeconds())
   const paddedHours = String(currentTime.value.getHours()).padStart(2, '0');
   const paddedMinutes = String(currentTime.value.getMinutes()).padStart(2, '0');
   const paddedSeconds = String(currentTime.value.getSeconds()).padStart(2, '0');
 
   // Hour
-  hourFirstPosition.value = paddedHours[0] * PER_TICK_POSITION;
-  hourSecondPosition.value = paddedHours[1] * PER_TICK_POSITION;
+  hourFirstPosition.value = Number(paddedHours[0]) * PER_TICK_POSITION;
+  hourSecondPosition.value = Number(paddedHours[1]) * PER_TICK_POSITION;
 
   // Minute
-  minuteFirstPosition.value = paddedMinutes[0] * PER_TICK_POSITION;
-  minuteSecondPosition.value = paddedMinutes[1] * PER_TICK_POSITION;
+  minuteFirstPosition.value = Number(paddedMinutes[0]) * PER_TICK_POSITION;
+  minuteSecondPosition.value = Number(paddedMinutes[1]) * PER_TICK_POSITION;
 
   // Second
-  secondFirstPosition.value = paddedSeconds[0] * PER_TICK_POSITION;
-  secondSecondPosition.value = paddedSeconds[1] * PER_TICK_POSITION;
+  secondFirstPosition.value = Number(paddedSeconds[0]) * PER_TICK_POSITION;
+  secondSecondPosition.value = Number(paddedSeconds[1]) * PER_TICK_POSITION;
 })
 </script>
 
